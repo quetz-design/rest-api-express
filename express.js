@@ -2,7 +2,7 @@ var express = require('express'),
 	mongoskin = require('mongoskin');
 
 var app = express();
-app.use(express.bodyParser);
+app.use(express.bodyParser());
 
 var db = mongoskin.db('localhost:27017/test', {safe:true});
 
@@ -22,7 +22,7 @@ app.get('/collections/:collectionName', function(req, res, next){
 	});
 });
 
-app.post('/collections/:collectionName/', function(req, res, next){
+app.post('/collections/:collectionName', function(req, res, next){
 	req.collection.insert(req.body, {}, function(e, results){
 		if(e) return next(e);
 		res.send(results);
