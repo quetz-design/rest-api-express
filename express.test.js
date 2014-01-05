@@ -6,8 +6,8 @@ describe('express rest api server', function(){
 
 	it('post object', function(done){
 		superagent.post('http://localhost:3000/collections/test')
-		.send({name: 'john',
-			email: 'john@rpjs.co'
+		.send({ name: 'John'
+			, email: 'john@rpjs.co'
 		})
 		.end(function(e, res){
 			//console.log(res.body)
@@ -20,7 +20,7 @@ describe('express rest api server', function(){
 	})
 
 	it('retrieves an object', function(done){
-		superagent.$.get('http://localhost:3000/collections/test/'+id)
+		superagent.get('http://localhost:3000/collections/test/'+id)
 		.end(function(e, res){
 			//console.log(res.body)
 			expect(e).to.eql(null)
@@ -37,16 +37,15 @@ describe('express rest api server', function(){
 			//console.log(res.body)
 			expect(e).to.eql(null)
 			expect(res.body.length).to.be.above(0)
-			expect(res.body.map(function(item){return item._id})).to.contain(id)
+			expect(res.body.map(function (item){return item._id})).to.contain(id)
 			done()
 		})
 	})
 
-	it('update an object', function(done){
+	it('updates an object', function(done){
 		superagent.put('http://localhost:3000/collections/test/'+id)
-		.send({name: 'Peter',
-			email: 'peter@yahoo.com'
-		})
+		.send({name: 'Peter'
+			, email: 'peter@yahoo.com'})
 		.end(function(e, res){
 			//console.log(res.body)
 			expect(e).to.eql(null)
